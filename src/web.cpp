@@ -11,7 +11,7 @@ void handle_root() {
     doc["humidity"] = dht.readHumidity();
     doc["temp"] = dht.readTemperature();
     doc["uptime"] = millis();
-    doc["vcc"] = ESP.getVcc();
+    doc["vcc"] = (double) ESP.getVcc() / 1000.0;
     doc["id"] = ESP.getChipId();
 
     String result;

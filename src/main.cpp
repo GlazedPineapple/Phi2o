@@ -12,6 +12,8 @@ ESP8266WebServer web(8000);
 
 DHT dht(DHTPIN, DHTTYPE);
 
+ADC_MODE(ADC_VCC);
+
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
