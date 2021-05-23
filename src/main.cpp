@@ -34,6 +34,7 @@ void setup() {
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
 
+    web.on("/metrics", handle_metrics);
     web.on("/", handle_root);
     web.begin();
 
@@ -42,11 +43,27 @@ void setup() {
     Serial.println("Ready");
 }
 
+float humidity;
+float temp;
+bool led_on = false;
+
+static void update_sensors() {
+    humidity = dht.readHumidity();
+    temp = dht.readTemperature();
+}
+
+uint32_t last_millis = 0;
+
 void loop() {
+    uint32_t current_millis = millis();
+
+    if (current_millis > last_millis + 1000) {
+        last_millis = current_millis;
+
+        update_sensors();
+
+        led_on = !led_on;
+        digitalWrite(LED_BUILTIN, led_on);
+    }
     web.handleClient();
-    // digitalWrite(LED_BUILTIN, HIGH);
-    // delay(1000);
-    // digitalWrite(LED_BUILTIN, LOW);
-    // delay(1000);
-    // Serial.println("penis");
 }
