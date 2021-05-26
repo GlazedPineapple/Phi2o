@@ -8,9 +8,9 @@
 #define DHTPIN 2
 #define DHTTYPE DHT22
 
-#define REFRESH_DELAY 1 // seconds
+#define REFRESH_DELAY 2 // seconds
 
-#define INFLUXDB_URL "http://TODO:8086"
+#define INFLUXDB_URL "http://wps-tempmon-msmdf:8086"
 #define INFLUXDB_DB_NAME "tempmon"
 
 DHT dht(DHTPIN, DHTTYPE);
