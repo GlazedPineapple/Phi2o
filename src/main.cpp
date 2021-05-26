@@ -1,21 +1,22 @@
 #include "psk.hpp"
-#include "web.hpp"
+#include "sensors.hpp"
 #include <Arduino.h>
 #include <DHT.h>
-#include <ESP8266WebServer.h>
 #include <ESP8266WiFi.h>
-
-ESP8266WebServer web(8000);
+#include <InfluxDb.h>
 
 #define DHTPIN 2
-#define DHTTYPE DHT11
+#define DHTTYPE DHT22
+
+#define REFRESH_DELAY 1 // seconds
+
+#define INFLUXDB_URL "http://TODO:8086"
+#define INFLUXDB_DB_NAME "tempmon"
 
 DHT dht(DHTPIN, DHTTYPE);
+InfluxDBClient client(INFLUXDB_URL, INFLUXDB_DB_NAME);
 
 ADC_MODE(ADC_VCC);
-
-// TODO: Setup config files and stuff on these with psks and all that as well as static IPs
-// also setup hostnames for them? `WiFi.hostname(aHostname)`
 
 void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
@@ -34,30 +35,19 @@ void setup() {
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
 
-    web.on("/metrics", handle_metrics);
-    web.on("/", handle_root);
-    web.begin();
-
     dht.begin();
 
     Serial.println("Ready");
 }
 
-float humidity;
-float temp;
 bool led_on = false;
-
-static void update_sensors() {
-    humidity = dht.readHumidity();
-    temp = dht.readTemperature();
-}
 
 uint32_t last_millis = 0;
 
 void loop() {
     uint32_t current_millis = millis();
 
-    if (current_millis > last_millis + 1000) {
+    if (current_millis > last_millis + (REFRESH_DELAY * 1000)) {
         last_millis = current_millis;
 
         update_sensors();
@@ -65,5 +55,4 @@ void loop() {
         led_on = !led_on;
         digitalWrite(LED_BUILTIN, led_on);
     }
-    web.handleClient();
 }
