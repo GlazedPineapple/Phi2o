@@ -10,7 +10,7 @@
 
 #define REFRESH_DELAY 2 // seconds
 
-#define INFLUXDB_URL "http://wps-tempmon-msmdf:8086"
+#define INFLUXDB_URL "http://wps-tempmon-msmdf-server:8086"
 #define INFLUXDB_DB_NAME "tempmon"
 
 DHT dht(DHTPIN, DHTTYPE);
@@ -22,6 +22,7 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
 
+    WiFi.hostname(String("WPS-TempMon-MSMDF-Node-") + String(ESP.getChipId(), HEX));
     WiFi.setAutoReconnect(true);
     WiFi.begin(ssid, psk);
 
