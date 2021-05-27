@@ -10,7 +10,7 @@
 
 #define REFRESH_DELAY 2 // seconds
 
-#define INFLUXDB_URL "http://wps-tempmon-msmdf-server:8086"
+#define INFLUXDB_URL "http://wps-tempmon-msmdf-server.clients.wellesleyps.org:8086"
 #define INFLUXDB_DB_NAME "tempmon"
 
 DHT dht(DHTPIN, DHTTYPE);
