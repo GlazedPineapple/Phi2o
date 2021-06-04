@@ -22,7 +22,7 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
 
-    WiFi.hostname(String("WPS-TempMon-MSMDF-Node-") + String(ESP.getChipId(), HEX));
+    WiFi.hostname(String("WPS-TempMon-MS337-Node-") + String(ESP.getChipId(), HEX));
     WiFi.setAutoReconnect(true);
     WiFi.begin(ssid, psk);
 
