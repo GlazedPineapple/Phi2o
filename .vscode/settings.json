@@ -2,5 +2,11 @@
     "files.associations": {
         "functional": "cpp",
         "cmath": "cpp"
-    }
+    },
+    "cSpell.words": [
+        "DHTPIN",
+        "DHTTYPE",
+        "INDEV",
+        "ssid"
+    ]
 }

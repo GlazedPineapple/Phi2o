@@ -5,6 +5,10 @@
 #include <ESP8266WiFi.h>
 #include <InfluxDb.h>
 
+#ifndef P2O_BUILD
+#define P2O_CLOSET_NAME "INDEV-NODEPLOY"
+#endif
+
 #define DHTPIN 2
 #define DHTTYPE DHT22
 
@@ -22,7 +26,7 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
 
-    WiFi.hostname(String("WPS-TempMon-MS337-Node-") + String(ESP.getChipId(), HEX));
+    WiFi.hostname(String("WPS-TempMon-" P2O_CLOSET_NAME "-Node-") + String(ESP.getChipId(), HEX));
     WiFi.setAutoReconnect(true);
     WiFi.begin(ssid, psk);
 
