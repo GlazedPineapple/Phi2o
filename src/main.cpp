@@ -26,7 +26,7 @@ void setup() {
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
 
-    WiFi.hostname(String("WPS-TempMon-" P2O_CLOSET_NAME "-Node-") + String(ESP.getChipId(), HEX));
+    WiFi.hostname(String("WPS-TempMon-") + String(P2O_CLOSET_NAME) + String("-Node-") + String(ESP.getChipId(), HEX));
     WiFi.setAutoReconnect(true);
     WiFi.begin(ssid, psk);
 
@@ -39,6 +39,7 @@ void setup() {
 
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
+    Serial.println(WiFi.hostname());
 
     dht.begin();
 
