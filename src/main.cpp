@@ -1,13 +1,10 @@
 #include "psk.hpp"
+#include "room_name.hpp"
 #include "sensors.hpp"
 #include <Arduino.h>
 #include <DHT.h>
 #include <ESP8266WiFi.h>
 #include <InfluxDb.h>
-
-#ifndef P2O_BUILD
-#define P2O_CLOSET_NAME "INDEV-NODEPLOY"
-#endif
 
 #define DHTPIN 2
 #define DHTTYPE DHT22

@@ -1,3 +1,4 @@
+#include "room_name.hpp"
 #include <DHT.h>
 #include <InfluxDb.h>
 
@@ -8,6 +9,7 @@ void update_sensors() {
     Point datum("environment");
 
     datum.addTag("board_id", String(ESP.getChipId(), HEX));
+    datum.addTag("room_name", P2O_CLOSET_NAME);
     datum.addTag("flash_id", String(ESP.getFlashChipId(), HEX));
     datum.addTag("cpu_freq", String(ESP.getCpuFreqMHz()) + String(" MHz"));
     datum.addTag("core_version", ESP.getCoreVersion());
