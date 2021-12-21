@@ -1,2 +1,2 @@
-const char *ssid = "MS Air";
-const char *psk = "Wellesley";
+const char *ssid = "Sprague Air";
+const char *psk = "wellesley";

@@ -37,6 +37,7 @@ void setup() {
     Serial.print("Connected, IP address: ");
     Serial.println(WiFi.localIP());
     Serial.println(WiFi.hostname());
+    Serial.println(WiFi.macAddress());
 
     dht.begin();
 
